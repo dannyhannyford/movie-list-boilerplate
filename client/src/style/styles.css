@@ -1,0 +1,52 @@
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: #f6f7d4;
+    margin: 0;
+    //28df99
+    //99f3bd
+    //d2f6c5
+    //f6f7d4
+}
+
+.button {
+    margin-left: 10px;
+}
+
+.addbutton {
+    background-color: #28df99;
+    margin-left: 10px;
+    border-width: 1px;
+    border-radius: 0;
+}
+
+.container {
+    margin-left: 25px;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.movie {
+    margin-left: 25px;
+    margin-right: 25px;
+    border-style: solid;
+    border-width: 1px;
+    padding: 0px 5px;
+    border-color: #056674;
+}
+
+.navbar {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    border: 0;
+    border-radius: 0;
+    border-style: solid;
+    border-width: 0 0 1px;
+    margin-bottom: 0;
+    font-size: 12px;
+    letter-spacing: 5px;
+    background-color: #d2f6c5;
+    margin-bottom: 25px;
+}
+
+
+
