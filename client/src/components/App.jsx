@@ -3,6 +3,7 @@ import moviesData from '../initData';
 import MovieList from './movieList';
 import NavbarSearch from './navbar.jsx';
 import MovieAdder from './movieAdder';
+import movies from '../initData';
 
 //moviesData
 
@@ -15,12 +16,13 @@ class App extends React.Component {
       inputValue: '',
       searched: false,
       filteredMovies: [],
-      addMovieInput: ''
+      addMovieInput: '',
     }
     this.handleClick = this.handleClick.bind(this);
     this.inputOnChange = this.inputOnChange.bind(this);
     this.addClick = this.addClick.bind(this);
     this.inputAddChange = this.inputAddChange.bind(this);
+    this.watchToggleClick = this.watchToggleClick.bind(this);
   }
 
   handleClick() {
@@ -47,13 +49,15 @@ class App extends React.Component {
     if (this.state.addMovieInput !== '') {
       this.setState({
         ...this.state,
-        movies: [...this.state.movies, {title: this.state.addMovieInput}]
+        movies: [...this.state.movies, {
+          title: this.state.addMovieInput,
+          hasWatched: false
+        }]
       })
     }
   }  
 
   inputAddChange(value) {
-    console.log('value', value)
     this.setState({
       ...this.state,
       addMovieInput: value
@@ -67,6 +71,25 @@ class App extends React.Component {
     });
   }
 
+  watchToggleClick(id) {
+    
+    const newList = this.state.movies.map(movie => {
+      if (movie.id === id) {
+        const updated = {
+          ...movie,
+          hasWatched: !movie.hasWatched
+        };
+        console.log('updated')
+        return updated;
+      }
+      return movie;
+    })
+    this.setState({
+      ...this.state,
+      movies: newList
+    })
+  }
+
   render() {
     return (<>
       <NavbarSearch 
@@ -78,6 +101,7 @@ class App extends React.Component {
         handleClick={this.addClick}/>
       <MovieList 
         movies={this.state.searched ? this.state.filteredMovies : this.state.movies}
+        handleClick={this.watchToggleClick}
       />
     </>)
   }
