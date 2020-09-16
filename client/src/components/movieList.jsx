@@ -2,7 +2,6 @@ import React from 'react';
 import Movie from './movie';
 
 const MovieList = ({movies, handleToggle}) => { 
-    
     return (
         <div>
             {movies.map((movie, index) => {

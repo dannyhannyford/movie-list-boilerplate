@@ -29,9 +29,6 @@ class NavbarSearch extends Component {
         })
     }
 
-//handleSearch
-//handleClick
-
     render() {
         return (<div className="navbar">
         <div className="container">

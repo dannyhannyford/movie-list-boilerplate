@@ -11,12 +11,15 @@ class App extends React.Component {
     super(props)
 
     this.state = {
-      movies: []
+      movies: [],
+      watched: false
     }
     this.handleSearch = this.handleSearch.bind(this);
     this.addClick = this.addClick.bind(this);
     this.getMovies = this.getMovies.bind(this);
     this.handleToggle = this.handleToggle.bind(this);
+    this.toggleWatchList = this.toggleWatchList.bind(this);
+    this.toggleWatchedList = this.toggleWatchedList.bind(this);
   }
 
   componentDidMount() {
@@ -25,7 +28,8 @@ class App extends React.Component {
 
   getMovies() {
     this.setState({
-      movies: this.state.movies
+      movies: this.state.movies,
+      watched: this.state.watched
     })
   }
 
@@ -39,13 +43,13 @@ class App extends React.Component {
       });
       console.log('moviesFound', moviesFound);
       this.setState({
-        movies: moviesFound
+        movies: moviesFound,
+        watched: this.state.watched
       })
     }
   }
 
   handleToggle(toggle) {
-    console.log('toggle', toggle);
     //go through all movies and change the hasWatched property of the selected movie
     const updatedMovies = this.state.movies.map(movie => {
       if(toggle.title ===  movie.title) {
@@ -54,7 +58,8 @@ class App extends React.Component {
       return movie;
     })
     this.setState({
-      movies: updatedMovies
+      movies: updatedMovies,
+      watched: this.state.watched
     })
   }
   
@@ -63,9 +68,24 @@ class App extends React.Component {
     const movies = [...this.state.movies];
     movies.push(movie)
       this.setState({
-       movies: movies
+       movies: movies,
+       watched: this.state.watched
       })
-  }  
+  }
+
+  toggleWatchList() {
+    this.setState({
+      movies: this.state.movies,
+      watched: false
+    })
+  }
+
+  toggleWatchedList() {
+    this.setState({
+      movies: this.state.movies,
+      watched: true
+    })
+  }
 
   render() {
     return (<>
@@ -75,9 +95,13 @@ class App extends React.Component {
       <MovieAdder 
         handleClick={this.addClick}   
       />
+      <button onClick={this.toggleWatchList}>To Watch</button>
+      <button onClick={this.toggleWatchedList}>Watched</button>
       <MovieList 
         handleToggle={this.handleToggle}
-        movies={this.state.movies}
+        movies={this.state.movies.filter(movie => {
+          return (movie.hasWatched === this.state.watched)
+        })}
       />
     </>)
   }
