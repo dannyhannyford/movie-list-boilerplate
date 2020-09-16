@@ -1,14 +1,14 @@
 import React from 'react';
 
-
-
-
-const Movie = ({movie, handleClick, id}) => 
+const Movie = ({movie, handleToggle}) => 
 { 
     return (
     <div className="movie">
         <p>{movie.title}</p>
-        <button onClick={() => handleClick(id)} className='addbutton'>{movie.hasWatched ? 'watched' : 'to watch'}</button>
+        <button 
+            onClick={() => handleToggle(movie)} 
+            className='addbutton'>{movie.hasWatched ? 'watched' : 'to watch'}
+        </button>
     </div>
     )
 };
